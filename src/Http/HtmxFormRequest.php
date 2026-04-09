@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Mauricius\LaravelHtmx\Http;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Mauricius\LaravelHtmx\Http\Concerns\HasHtmxRequest;
 
-class HtmxRequest extends Request
+class HtmxFormRequest extends FormRequest
 {
     use HasHtmxRequest;
 }
