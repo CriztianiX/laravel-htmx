@@ -24,5 +24,7 @@ class LaravelHtmxServiceProvider extends ServiceProvider
         View::macro('renderFragment', function (string $view, string $fragment, array $data = []) {
             return BladeFragment::render($view, $fragment, $data);
         });
+
+        $this->app->singleton(RequestStore::class);
     }
 }
