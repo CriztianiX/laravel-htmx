@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use JsonException;
 use Mauricius\LaravelHtmx\Utils;
 use Mauricius\LaravelHtmx\View\BladeFragment;
+use Mauricius\LaravelHtmx\View\FragmentResolver;
 use Symfony\Component\HttpFoundation\Request;
 
 class HtmxResponse extends Response
@@ -98,14 +99,16 @@ class HtmxResponse extends Response
 
     public function renderFragment(string $view, string $fragment, array $data = []): static
     {
-        $this->fragments = [BladeFragment::render($view, $fragment, $data)];
+        $resolver = new FragmentResolver($view);
+        $this->fragments = [$resolver->render($view, $fragment, $data)];
 
         return $this;
     }
 
     public function addFragment(string $view, string $fragment, array $data = []): static
     {
-        $this->fragments[] = BladeFragment::render($view, $fragment, $data);
+        $resolver = new FragmentResolver($view);
+        $this->fragments[] = [$resolver->render($view, $fragment, $data)];
 
         return $this;
     }
