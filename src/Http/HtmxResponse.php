@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mauricius\LaravelHtmx\Http;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Response;
 use JsonException;
 use Mauricius\LaravelHtmx\Utils;
@@ -97,18 +98,18 @@ class HtmxResponse extends Response
         return $this;
     }
 
-    public function renderFragment(string $view, string $fragment, array $data = []): static
+    public function renderFragment(string $view, string $fragment, array|Arrayable $data = []): static
     {
         $resolver = new FragmentResolver($view);
-        $this->fragments = [$resolver->render($view, $fragment, $data)];
+        $this->fragments = [$resolver->render($view, $fragment, (array)$data)];
 
         return $this;
     }
 
-    public function addFragment(string $view, string $fragment, array $data = []): static
+    public function addFragment(string $view, string $fragment, array|Arrayable $data = []): static
     {
         $resolver = new FragmentResolver($view);
-        $this->fragments[] = [$resolver->render($view, $fragment, $data)];
+        $this->fragments[] = [$resolver->render($view, $fragment, (array)$data)];
 
         return $this;
     }

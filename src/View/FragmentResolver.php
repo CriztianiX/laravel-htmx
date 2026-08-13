@@ -10,7 +10,7 @@ class FragmentResolver
 {
     public function __construct() {}
 
-    public function render($view, $fragment, $data): string
+    public function render($view, $fragment, array $data): string
     {
         $path = View::getFinder()->find($view);
         $engine = View::getEngineFromPath($path);
