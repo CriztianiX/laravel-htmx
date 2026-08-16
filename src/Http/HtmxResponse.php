@@ -109,7 +109,7 @@ class HtmxResponse extends Response
     public function addFragment(string $view, string $fragment, array|Arrayable $data = []): static
     {
         $resolver = new FragmentResolver($view);
-        $this->fragments[] = [$resolver->render($view, $fragment, (array)$data)];
+        $this->fragments[] = $resolver->render($view, $fragment, (array)$data);
 
         return $this;
     }
